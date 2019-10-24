@@ -1,2 +1,6 @@
 flask
 sqlalchemy
+flask-script
+flask-login
+flask-sqlalchemy
+flask-migrate
