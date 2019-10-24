@@ -12,8 +12,9 @@
 
   <body>
     <div id="PINcode">
-      <form action='' method='' name='PINform' id='PINform' autocomplete='off' draggable='true'>
-        <input id='PINbox' value='' maxlength='16' name='PINbox' disabled />
+      <form action='' method='post' name='PINform' id='PINform' autocomplete='off' draggable='true'>
+        <p class='form-title'>Enter card number</p>
+        <input id='PINbox' name='PINbox' disabled/>
         <br>
         <input type='button' class='PINbutton' name='1' value='1' id='1' onClick=addNumber(this); />
         <input type='button' class='PINbutton' name='2' value='2' id='2' onClick=addNumber(this); />

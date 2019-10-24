@@ -1,5 +1,11 @@
 body {
-	background: #000000;
+	background: #5978ba;
+}
+
+.form-title {
+	font-size: 1.3em;
+	text-align: center;
+	color: #7e7e7e;
 }
 
 #PINform input:focus,
@@ -11,7 +17,7 @@ body {
 #PINform {
 	background: #ededed;
 	position: absolute;
-	width: 310px; height: 350px;
+	width: 310px; height: 400px;
 	left: 50%;
 	margin-left: -180px;
 	top: 50%;
@@ -41,16 +47,30 @@ body {
 	margin: 7px 20px;
 	padding: 0;
 }
+
+.Opbutton {
+	background: #ededed;
+	color: #7e7e7e;
+	border: none;
+	border-radius: 5%;
+	font-size: 1.5em;
+	text-align: center;
+	width: 200px;
+	height: 60px;
+	margin-left: 55px;
+}
+
 .clear, .enter {
 	font-size: 1em;
 }
-.PINbutton:hover {
+.PINbutton:hover, .Opbutton:hover {
  	box-shadow: #506CE8 0 0 1px 1px;
 }
-.PINbutton:active {
+.PINbutton:active, .Opbutton:hover {
  	background: #506CE8;
 	color: #fff;
 }
+
 .clear:hover {
  	box-shadow: #ff3c41 0 0 1px 1px;
 }

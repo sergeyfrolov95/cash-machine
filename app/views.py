@@ -4,17 +4,17 @@ from flask import render_template
 
 @app.route('/')
 def login():
-    return render_template('login.html')
+    return render_template('index.html')
 
 
 @app.route('/pin')
 def pin():
-    return None
+    return render_template('pin.html')
 
 
 @app.route('/operations')
 def operations():
-    return None
+    return render_template('operations.html')
 
 
 @app.route('/balance')
@@ -24,7 +24,7 @@ def balance():
 
 @app.route('/cash')
 def cash():
-    return None
+    return render_template('cash.html')
 
 
 @app.route('/error')
