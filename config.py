@@ -13,6 +13,8 @@ class Base(object):
     SECRET_KEY = 'RlnJ9Du3tPGq1jrCAEMaY3wm1oVop225DIf8wlaVl7eu5XibLN'
     WTF_CSRF_SECRET_KEY = 'IhAvE1a5ReAlLy6SeCrEtE4kEy'
     SECURITY_PASSWORD_SALT = 'IhAvE1a5ReAlLy6SeCrEtE4kEy'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://sergey@localhost:5432/cash'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Database
     SQLALCHEMY_DATABASE_URI = ''

@@ -1,9 +1,12 @@
-from app import app
+from app import app, db
+from app.models import Card, Log
 from flask import render_template
 
 
 @app.route('/')
 def login():
+    q = db.session.query(Card).all()
+    print(q)
     return render_template('index.html')
 
 
