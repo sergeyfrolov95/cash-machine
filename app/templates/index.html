@@ -12,9 +12,9 @@
 
   <body>
     <div id="PINcode">
-      <form action='' method='post' name='PINform' id='PINform' autocomplete='off' draggable='true'>
+      <form action='{{ url_for('login')}}' method='POST' name='PINform' id='PINform' autocomplete='off' draggable='true'>
         <p class='form-title'>Enter card number</p>
-        <input id='PINbox' name='PINbox' disabled/>
+        <input id='PINbox' name='PINbox' readonly/>
         <br>
         <input type='button' class='PINbutton' name='1' value='1' id='1' onClick=addNumber(this); />
         <input type='button' class='PINbutton' name='2' value='2' id='2' onClick=addNumber(this); />
@@ -30,7 +30,7 @@
         <br>
         <input type='button' class='PINbutton clear' name='-' value='clear' id='-' onClick=clearForm(this); />
         <input type='button' class='PINbutton' name='0' value='0' id='0' onClick=addNumber(this); />
-        <input type='button' class='PINbutton enter' name='+' value='enter' id='+' onClick=submitForm(PINbox); />
+        <input type='submit' class='PINbutton enter' name='+' value='enter' id='+' />
       </form>
     </div>
 

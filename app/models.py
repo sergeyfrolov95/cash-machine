@@ -1,10 +1,4 @@
-from app import db, app
-from datetime import datetime
-
-__all__ = (
-    'Card',
-    'Log'
-)
+from app import db
 
 
 class Card(db.Model):
@@ -12,8 +6,8 @@ class Card(db.Model):
     __tablename__ = 'card'
 
     id = db.Column(db.Integer, primary_key=True)
-    number = db.Column(db.String(16), nullable=False)
-    password = db.Column(db.String, nullable=False)
+    number = db.Column(db.String(16), nullable=False, unique=True)
+    password = db.Column(db.String(32), nullable=False)
     balance = db.Column(db.DECIMAL(12, 2), nullable=False)
     lock = db.Column(db.Boolean, nullable=False)
 

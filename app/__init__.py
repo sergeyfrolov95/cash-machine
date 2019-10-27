@@ -1,9 +1,6 @@
 import os
-from datetime import datetime
 from flask import Flask
-from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func
 
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -18,11 +15,3 @@ db.init_app(app)
 
 from app.models import *
 from app.views import *
-
-#login_manager = LoginManager()
-#login_manager.init_app(app)
-
-
-#@login_manager.user_loader
-#def load_user(user_id):
-#    return User.query.filter_by(id=user_id).first()

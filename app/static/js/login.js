@@ -31,16 +31,3 @@ function addCash(e){
 function clearForm(e){
 	$( "#PINbox" ).val( "" );
 }
-
-function submitForm(e) {
-	if (e.value == "") {
-		alert("Enter a PIN");
-	} else {
-		alert( "Your PIN has been sent! - " + e.value.replace(/ /gi, '') );
-		data = {
-			pin: e.value.replace(/ /gi, '')
-		}
-
-		$( "#PINbox" ).val( "" );
-	};
-};
