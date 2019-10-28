@@ -31,6 +31,8 @@
         <input type='button' class='PINbutton clear' name='-' value='clear' id='-' onClick=clearForm(this); />
         <input type='button' class='PINbutton' name='0' value='0' id='0' onClick=addCash(this); />
         <input type='submit' class='PINbutton enter' name='+' value='enter' id='+' />
+        <br>
+        <input type='button' class='Opbutton' name='back' value='Back' id='back' onclick="location.href='{{ url_for('operations', id=id) }}'"/>
       </form>
     </div>
 

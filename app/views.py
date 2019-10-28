@@ -4,6 +4,7 @@ from flask import render_template, redirect, url_for, request
 import hashlib
 import jwt
 from jwt.exceptions import InvalidSignatureError, DecodeError, InvalidAlgorithmError
+from functools import wraps
 
 from app import app, db
 from app.models import Card, Log
@@ -17,7 +18,7 @@ def jwt_decode(data):
     try:
         data = jwt.decode(data, app.config['SECRET_KEY'], algorithms=['HS256'])
     except (InvalidSignatureError, DecodeError, InvalidAlgorithmError) as e:
-        message = 'Autorization error'
+        message = 'Authorization error'
         return redirect(url_for('error', message=message))
     return data
 
@@ -33,6 +34,26 @@ def check_jwt_token(token):
         return False, data['card'], 'timeout'
     else:
         return True, data['card'], 'OK'
+
+
+def validate_token():
+    def _validate_token(f):
+        @wraps(f)
+        def __validate_token(*args, **kwargs):
+            raw_token = request.args.get('id', '')
+            if raw_token:
+                token = check_jwt_token(raw_token)
+            else:
+                message = 'Authorization error, try again'
+                return redirect(url_for('error', message=message))
+            if not token[0]:
+                message = 'Authorization timeout, try again' \
+                    if token[2] == 'timeout' else 'Authorization error, try again'
+                return redirect(url_for('error', message=message))
+
+            return f(*args, **kwargs)
+        return __validate_token
+    return _validate_token
 
 
 @app.route('/',  methods=['GET', 'POST'])
@@ -92,32 +113,17 @@ def pin():
 
 
 @app.route('/operations', methods=['GET', 'POST'])
+@validate_token()
 def operations():
     raw_token = request.args.get('id', '')
-    if raw_token:
-        token = check_jwt_token(raw_token)
-    else:
-        message = 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
-    if not token[0]:
-        message = 'Authorization timeout, try again' \
-            if token[2] == 'timeout' else 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
     return render_template('operations.html', id=raw_token)
 
 
 @app.route('/balance')
+@validate_token()
 def balance():
     raw_token = request.args.get('id', '')
-    if raw_token:
-        token = check_jwt_token(raw_token)
-    else:
-        message = 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
-    if not token[0]:
-        message = 'Authorization timeout, try again' \
-            if token[2] == 'timeout' else 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
+    token = check_jwt_token(raw_token)
     balance = db.session.query(Card.balance).filter(Card.number == token[1]).one_or_none()
     db.session.add(
         Log(
@@ -136,17 +142,10 @@ def balance():
 
 
 @app.route('/cash', methods=['GET', 'POST'])
+@validate_token()
 def cash():
     raw_token = request.args.get('id', '')
-    if raw_token:
-        token = check_jwt_token(raw_token)
-    else:
-        message = 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
-    if not token[0]:
-        message = 'Authorization timeout, try again' \
-            if token[2] == 'timeout' else 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
+    token = check_jwt_token(raw_token)
 
     if request.method == 'POST':
         amount = request.form.get('PINbox', '')
@@ -167,21 +166,14 @@ def cash():
             db.session.commit()
             return redirect(url_for('cash_report', id=raw_token, amount=amount))
 
-    return render_template('cash.html')
+    return render_template('cash.html', id=raw_token)
 
 
 @app.route('/cash-report')
+@validate_token()
 def cash_report():
     raw_token = request.args.get('id', '')
-    if raw_token:
-        token = check_jwt_token(raw_token)
-    else:
-        message = 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
-    if not token[0]:
-        message = 'Authorization timeout, try again' \
-            if token[2] == 'timeout' else 'Authorization error, try again'
-        return redirect(url_for('error', message=message))
+    token = check_jwt_token(raw_token)
 
     card_query = db.session.query(Card.number, Card.balance) \
         .filter(Card.number == token[1]).one_or_none()
