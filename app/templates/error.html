@@ -13,12 +13,9 @@
   <body>
     <div id="PINcode">
       <form action='' method='post' name='PINform' id='PINform' autocomplete='off' draggable='true'>
-        <p class='form-title'>Choose operation</p>
-        <input type='button' class='Opbutton' name='balance' value='View balance' id='1' onclick="location.href='{{ url_for('balance', id=id) }}'"/>
+        <p class='form-title'>{{ message }}</p>
         <br>
-        <input type='button' class='Opbutton' name='cash' value='Get cash' id='2' onclick="location.href='{{ url_for('cash', id=id) }}'"/>
-        <br>
-        <input type='button' class='Opbutton' name='exit' value='Exit' id='3' onclick="location.href='{{ url_for('login')}}'"/>
+        <input type='button' class='Opbutton' name='exit' value='Exit' id='2' onclick="location.href='{{ url_for('login')}}'"/>
       </form>
     </div>
 
