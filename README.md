@@ -3,7 +3,7 @@
 This is cash machine application based on web.
 You can try it by yourself [here](http://167.99.244.143:8000/).
 
-There are test data available:
+There is test data available:
 1. Card number: 1111-1111-1111-1111, PIN: 2222
 2. Card number: 2222-2222-2222-2222, PIN: 3333
 
