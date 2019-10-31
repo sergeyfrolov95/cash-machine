@@ -1,7 +1,6 @@
 # cash-machine
 
 This is cash machine application based on web.
-You can try it by yourself [here](http://167.99.244.143:8000/).
 
 There is test data available:
 1. Card number: 1111-1111-1111-1111, PIN: 2222
